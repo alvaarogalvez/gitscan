@@ -13,6 +13,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y sshpass
       - name: conectar ssh
         run: |
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "
           echo 'Conexión exitosa' &&
           echo 'Hola mundo' > alvarito.txt"
