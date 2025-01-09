@@ -1,0 +1,31 @@
+name: Tareas combinadas
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  conexion-ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+      - name: Conectar vía SSH y ejecutar comandos
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "
+          echo 'Conexión exitosa' &&
+          echo 'Hola mundo' > alvarito.txt"
+
+  escaneo-nmap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar nmap
+        run: sudo apt-get update && sudo apt-get install -y nmap
+      - name: Realizar escaneo Nmap
+        run: nmap nike.com -oN nmap_report.txt
+      - name: Subir reporte de escaneo
+        uses: actions/upload-artifact@v3
+        with:
+          name: nmap-scan-alvaro
+          path: nmap_report.txt
