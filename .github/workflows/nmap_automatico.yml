@@ -1,4 +1,4 @@
-name: nmap manual
+name: nmap automatico
 
 on:
   schedule:
