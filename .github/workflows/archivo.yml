@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: unirse ssh
-        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o
+        run: sudo apt-get update && sudo apt-get install -y sshpass
       - name: conectar ssh
-        run: StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
+        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
