@@ -1,0 +1,17 @@
+name: nmap manual
+
+on:
+  schedule:
+    - cron: "* * * * *" # Ejecutar cada minuto
+  push:
+    branches:
+      - master
+
+jobs:
+  hola:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar nmap
+        run: sudo apt-get install -y nmap
+      - name: Ejecutar nmap
+        run: nmap nike.com
