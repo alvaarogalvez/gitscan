@@ -9,7 +9,10 @@ jobs:
   conexion-ssh:
     runs-on: ubuntu-latest
     steps:
-      - name: unirse ssh
+      - name: instalar ssh
         run: sudo apt-get update && sudo apt-get install -y sshpass
       - name: conectar ssh
-        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "
+          echo 'Conexión exitosa' &&
+          echo 'Hola mundo' > hola_mundo.txt"
