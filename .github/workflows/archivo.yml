@@ -6,8 +6,10 @@ on:
               - master
 
 jobs:
-  hola:
+  conexion ssh:
     runs-on: ubuntu-latest
     steps:
       - name: unirse ssh
-        run: ssh -v
+        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o
+      - name: conectar ssh
+        run: StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "echo 'Conexión exitosa'"
