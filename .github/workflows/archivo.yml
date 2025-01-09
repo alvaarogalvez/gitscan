@@ -1,0 +1,15 @@
+name: acceso ssh
+
+on:
+    push:
+        branches:
+              - master
+
+jobs:
+  hola:
+    runs-on: ubuntu-latest
+    steps:
+      - name: unirse ssh
+        run: ssh -v
+      - name: 
+        run: 
