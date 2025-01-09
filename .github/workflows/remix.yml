@@ -1,4 +1,4 @@
-name: remix
+name: NMAP y SSH
 
 on:
   push:
@@ -6,26 +6,30 @@ on:
       - master
 
 jobs:
-  conexion-ssh:
+  nmap_ssh:
     runs-on: ubuntu-latest
     steps:
-      - name: Instalar sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
-      - name: Conectar vía SSH y ejecutar comandos
-        run: |
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "
-          echo 'Conexión exitosa' &&
-          echo 'Hola mundo' > alvarito.txt"
-
-  escaneo-nmap:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Instalar nmap
+      # Instalar Nmap
+      - name: Instalar Nmap
         run: sudo apt-get update && sudo apt-get install -y nmap
-      - name: Realizar escaneo Nmap
+
+      # Realizar el escaneo con Nmap
+      - name: Realizar escaneo con Nmap
         run: nmap nike.com -oN nmap_report.txt
-      - name: Subir reporte de escaneo
-        uses: actions/upload-artifact@v4
-        with:
-          name: nmap-scan-alvaro
-          path: nmap_report.txt
+
+      # Subir el reporte al servidor por SSH
+      - name: Instalar sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Enviar reporte al servidor por SSH
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "
+          echo 'Conexión exitosa' &&
+          mkdir -p ~/nmap_reports" &&
+          sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no nmap_report.txt ${{ secrets.USER }}@${{ secrets.IP }}:~/nmap_reports/
+
+      # Confirmar la subida
+      - name: Confirmar reporte subido
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.IP }} "
+          ls ~/nmap_reports"
