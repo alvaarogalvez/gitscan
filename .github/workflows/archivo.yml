@@ -11,5 +11,3 @@ jobs:
     steps:
       - name: unirse ssh
         run: ssh -v
-      - name: 
-        run: 
