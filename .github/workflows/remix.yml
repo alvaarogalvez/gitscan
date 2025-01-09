@@ -25,7 +25,7 @@ jobs:
       - name: Realizar escaneo Nmap
         run: nmap nike.com -oN nmap_report.txt
       - name: Subir reporte de escaneo
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nmap-scan-alvaro
           path: nmap_report.txt
