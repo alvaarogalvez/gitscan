@@ -1,4 +1,4 @@
-name: Tareas combinadas
+name: remix
 
 on:
   push:
