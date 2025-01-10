@@ -1,8 +1,8 @@
 name: nmap automatico
 
 on:
-  schedule:
-    - cron: '*/10 * * * *' # Ejecutar cada minuto
+  #schedule:
+    #- cron: '*/10 * * * *' # Ejecutar cada minuto
   push:
     branches:
       - master
