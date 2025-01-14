@@ -15,4 +15,4 @@ jobs:
         run: |
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.USUARIO }}@${{ secrets.IP }} "
           echo 'Conexión exitosa' &&
-          echo 'Hola mundo' > alvarito.txt"
+          echo 'Hola mundo' > alvarito.txt
